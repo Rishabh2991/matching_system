@@ -1,9 +1,25 @@
-from flask import Flask, request, jsonify
-from app import app, db
-from app.models import User, Like
-from app.match_algorithm import MatchAlgorithm
-import json
+from flask import Flask,request,jsonify
+from flask_sqlalchemy import SQLAlchemy
+from flask_redis import FlaskRedis
+from flask_migrate import Migrate
 
+class Config:
+    DEBUG = True
+    SQLALCHEMY_DATABASE_URI = 'postgresql://username:password@db:5432/matchmaking'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    REDIS_HOST = 'localhost'
+    REDIS_PORT = 6379
+
+app = Flask(__name__)
+app.config.from_object(Config)
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+redis_store = FlaskRedis(app)
+
+from models import User
+from match_algorithm import MatchAlgorithm
+
+##########################################################
 
 @app.route('/register', methods=['POST'])
 def register_user():
@@ -66,6 +82,5 @@ def unlike_user(user_id, liked_user_id):
     MatchAlgorithm.remove_match(user_id, liked_user_id)
     return jsonify({'message': 'User unliked'}), 200
 
-
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=8000, debug=True)

@@ -1,15 +1,19 @@
 from app import db
 
-
 class User(db.Model):
+
+    __tablename__ = 'user'
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
+    gender = db.Column(db.String(100), nullable=False)
     age = db.Column(db.Integer, nullable=False)
     height = db.Column(db.Integer, nullable=False)
     preferred_age_min = db.Column(db.Integer, nullable=False)
     preferred_age_max = db.Column(db.Integer, nullable=False)
     preferred_height_min = db.Column(db.Integer, nullable=False)
     preferred_height_max = db.Column(db.Integer, nullable=False)
+    preferred_gender = db.Column(db.String(100),nullable=False)
 
     def __repr__(self):
         return f"<User {self.name}>"

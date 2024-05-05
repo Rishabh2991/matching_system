@@ -1,6 +1,7 @@
-from app import db
-from app.models import User, Like, Match
+from app import User, Like, Match
+from flask_sqlalchemy import SQLAlchemy
 
+db = SQLAlchemy()
 
 class MatchAlgorithm:
     @staticmethod
