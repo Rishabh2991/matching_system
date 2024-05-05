@@ -16,6 +16,18 @@ API Design: Create APIs for the following actions
 - You are free to use any type of databases RDBMS, NoSQL etc. You can use a database for caching (Redis preferred).
 
 
+Instructions for local dev:
+- Docker should be installed on the system
+- On a terminal, build and spin up all docker containers setup inside the codebase using:
+  ```docker compose up --build```
+- Open a different terminal window and open application shell to run db migrations
+  ``` docker exec -it matching_system-web-1 sh ```
+- Inside the web shell, run the following commands
+  ```flask db init```
+  ```flask db migrate```
+  ```flask db upgrade```    
+
+
 High Level Design:
 
 <img width="1113" alt="Screenshot 2024-04-25 at 1 21 25 PM" src="https://github.com/Rishabh2991/matching_system/assets/22934371/a8327da3-d30d-4f90-9ad2-f8e5f7564669">
