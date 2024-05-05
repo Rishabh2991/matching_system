@@ -51,9 +51,21 @@ Dependencies:
 
       
     - A redis store to save potential matches and power /potential_matches to a user
+
+      ![Screenshot 2024-05-05 at 7 01 54 PM](https://github.com/Rishabh2991/matching_system/assets/22934371/dbf5c546-1bff-4b1c-bda5-e137253f6d74)
+
+        
+      
 - Services:
     -  Fetch potential matches from redis clusters
     -  Save profiles liked/unliked by a user
     -  Save matches based on liked profile history of users
     -  Unlike profiles
     -  Get Matched profiles for a user
+ 
+- Scaling Strategies
+  - Horizontal Sharding on Entity specific keys: Shard the database to distribute data across multiple database servers. This can help improve read and write performance by reducing the load on individual database servers. You can shard based on user 
+    IDs, geographical regions, or other criteria relevant to your application.
+    
+  - Geo-replication: Replicate data across multiple geographical regions to improve data locality and reduce latency for users in different parts of the world.
+    
